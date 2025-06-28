@@ -8,12 +8,12 @@ Sistema de gestión para un programa de fidelidad para una cadena de tiendas de 
 <summary>Tabla de contenidos</summary>
 
 - [Tareas de INF331 - Pruebas de Software](#tareas-de-inf331---pruebas-de-software)
-- [Descripción del Diseño](#-🧩-Descripción-del-Diseño)
-- [Instrucciones-para-compilar-y-ejecutar](#-⚙️-Instrucciones-para-compilar-y-ejecutar)
-- [Ejemplo-de-Salid-de-Test](#💾-Ejemplo-de-Salid-de-Test)
-- [¿Qué-tipo-de-cobertura-he-medido-y-por-qué?](#⭐-¿Qué-tipo-de-cobertura-he-medido-y-por-qué?)
-- [Otras-consideraciones](#🔎-Otras-consideraciones)
-- [Licencia](#📖-Licencia)
+- [Descripción del Diseño](#Descripción-del-Diseño)
+- [Instrucciones-para-compilar-y-ejecutar](#Instrucciones-para-compilar-y-ejecutar)
+- [Ejemplo-de-Salid-de-Test](#Ejemplo-de-Salid-de-Test)
+- [¿Qué-tipo-de-cobertura-he-medido-y-por-qué?](#¿Qué-tipo-de-cobertura-he-medido-y-por-qué?)
+- [Otras-consideraciones](#Otras-consideraciones)
+- [Licencia](#Licencia)
 
 </details>
 
@@ -80,4 +80,4 @@ a
 a
 
 ## 📖 Licencia
-Por favor, revise este link.
+Por favor, revise este [link](https://github.com/valnhe/inf331-tarea3/blob/master/LICENSE.txt).
