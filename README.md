@@ -8,12 +8,12 @@ Sistema de gestión para un programa de fidelidad para una cadena de tiendas de 
 <summary>Tabla de contenidos</summary>
 
 - [Tareas de INF331 - Pruebas de Software](#tareas-de-inf331---pruebas-de-software)
-- [Descripción del Diseño](#Descripción-del-Diseño)
-- [Instrucciones-para-compilar-y-ejecutar](#Instrucciones-para-compilar-y-ejecutar)
-- [Ejemplo-de-Salid-de-Test](#Ejemplo-de-Salid-de-Test)
-- [¿Qué-tipo-de-cobertura-he-medido-y-por-qué?](#¿Qué-tipo-de-cobertura-he-medido-y-por-qué?)
-- [Otras-consideraciones](#Otras-consideraciones)
-- [Licencia](#Licencia)
+- [Descripción del Diseño](#-descripción-del-diseño)
+- [Instrucciones-para-compilar-y-ejecutar](#-instrucciones-para-compilar-y-ejecutar)
+- [Ejemplo-de-Salida-de-Test](#-ejemplo-de-salida-de-test)
+- [¿Qué-tipo-de-cobertura-he-medido-y-por-qué?](#-qué-tipo-de-cobertura-he-medido-y-por-qué)
+- [Otras-consideraciones](#-otras-consideraciones)
+- [Licencia](#-licencia)
 
 </details>
 
