@@ -1,7 +1,7 @@
 
 # Tarea 3 de INF331 - Pruebas de Software
 
-Sistema de gestión para un programa de fidelidad para una cadena de tiendas de conveniencia. El código viene acompañado con pruebas unitarias JUnit y medición de cobertura a través de...
+Sistema de gestión para un programa de fidelidad para una cadena de tiendas de conveniencia. El código viene acompañado con pruebas unitarias JUnit y medición de cobertura a través de EcclEmma.
 
 
 <details>
