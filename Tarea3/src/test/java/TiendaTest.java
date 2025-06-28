@@ -1,5 +1,5 @@
 import static org.junit.jupiter.api.Assertions.*;
-
+import java.time.LocalDate;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -73,4 +73,59 @@ public class TiendaTest {
         boolean eliminado = tienda.eliminarCliente("999");
         assertFalse(eliminado);
     }
+    
+    @Test
+    public void givenValidCliente_whenRegistrarCompraAutomatica_thenCompraRegistradaConId() {
+        Compra compra = tienda.registrarCompraAutomatica("001", 1000);
+
+        assertNotNull(compra);
+        assertEquals("001", compra.getIdCliente());
+        assertTrue(compra.getIdCompra().startsWith("COMP"));
+        assertEquals(1000, compra.getMonto());
+    }
+    
+    @Test
+    public void givenInvalidCliente_whenRegistrarCompraAutomatica_thenRetornaNull() {
+        Compra compra = tienda.registrarCompraAutomatica("999", 500);
+        assertNull(compra);
+    }
+    
+    @Test
+    public void givenClienteConCompra_whenMostrarCompras_thenNoFalla() {
+        tienda.registrarCompra(new Compra("CX", "001", 500, LocalDate.now()));
+        tienda.mostrarComprasDeCliente("001");
+    }
+    
+    @Test
+    public void givenClienteSinCompras_whenMostrarCompras_thenNoFalla() {
+        tienda.mostrarComprasDeCliente("001");
+    }
+    
+    @Test
+    public void givenNoClientes_whenMostrarClientes_thenNoFalla() {
+        Tienda tiendaVacia = new Tienda();
+        tiendaVacia.mostrarClientes();
+    }
+    
+    @Test
+    public void givenClientesExistentes_whenMostrarClientes_thenNoFalla() {
+        tienda.mostrarClientes();
+    }
+    
+    @Test
+    public void givenValidData_whenAgregarClienteAutomatico_thenClienteRegistrado() {
+        Cliente nuevo = tienda.agregarClienteAutomatico("Luis", "luis@mail.com");
+
+        assertNotNull(nuevo);
+        assertTrue(nuevo.getId().startsWith("C"));
+        assertEquals("Luis", nuevo.getNombre());
+    }
+    
+    @Test
+    public void givenInvalidCorreo_whenAgregarClienteAutomatico_thenThrowsException() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            tienda.agregarClienteAutomatico("Luis", "correo_sin_arroba");
+        });
+    }
+
 }
