@@ -124,7 +124,7 @@ public class TiendaTest {
     @Test
     public void givenInvalidCorreo_whenAgregarClienteAutomatico_thenThrowsException() {
         assertThrows(IllegalArgumentException.class, () -> {
-            tienda.agregarClienteAutomatico("Luis", "correo_sin_arroba");
+            tienda.agregarClienteAutomatico("Luis", "correo_sin_@");
         });
     }
 
