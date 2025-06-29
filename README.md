@@ -28,7 +28,22 @@ Este sistema permite registrar clientes, compras y calcular puntos de fidelizaci
 ![image](https://github.com/user-attachments/assets/b57071e1-1387-4a96-a57c-3cc7468b1352)
 
 ## ⚙️ Instrucciones para compilar y ejecutar
-a
+Este proyecto está desarrollado en Java y estructurado como una aplicación Maven. Para compilar, ejecutar y testear el sistema correctamente, se deben seguir los siguientes pasos:
+
+### 📦 Requisitos previos
+* Java JDK 17 o superior instalado
+* Apache Maven instalado y agregado al PATH
+
+### 🚀 Compilar el proyecto
+1. Clona el repositorio
+2. Navega e ingresa a la carpeta `Tarea3`.
+3. Estando detro de la carpeta `Tarea3`, escriba `mvn compile`. Esto compilará todas las clases del directorio `src/main/java`.
+4. Ejecuta la clase principal `Main.java` con `mvn exec:java -Dexec.mainClass="Main"`. Esto correra la aplicación y se podrá utilizar.
+* Para ejecutar los test, utilice `mvn test`.
+
+### 💡 Notas adicionales
+* Los IDs de clientes y compras se generan automáticamente (C1, COMP1, etc.).
+* Todos los datos se mantienen en memoria durante la ejecución.
 
 ## 💾 Ejemplo de Salida de Test
 ### CompraTest
@@ -87,9 +102,6 @@ Los resultados globales mostraron una cobertura total del **69,5%**, donde la cl
 ![image](https://github.com/user-attachments/assets/3b87dc30-9979-4bff-a3bc-d414c8f957fe)
 
 La cobertura se logró ejecutando todas las clases de prueba con la opción "Coverage As → JUnit Test". En particular, se diseñaron tests con el enfoque **given-when-then** para seguir lo recomendado por TDD. Esto permitió cubrir tanto la lógica de asignación de puntos como la gestión automática de IDs y condiciones condicionales que cambian el comportamiento del sistema según los datos de entrada.
-
-## 🔎 Otras consideraciones
-a
 
 ## 📖 Licencia
 Por favor, revise este [link](https://github.com/valnhe/inf331-tarea3/blob/master/LICENSE.txt).
