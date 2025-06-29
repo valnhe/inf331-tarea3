@@ -38,7 +38,7 @@ Este proyecto está desarrollado en Java y estructurado como una aplicación Mav
 1. Clona el repositorio
 2. Navega e ingresa a la carpeta `Tarea3`.
 3. Estando detro de la carpeta `Tarea3`, escriba `mvn compile`. Esto compilará todas las clases del directorio `src/main/java`.
-4. Ejecuta la clase principal `Main.java` con `mvn exec:java -Dexec.mainClass="Main"`. Esto correra la aplicación y se podrá utilizar.
+4. Ejecuta la clase principal `Main.java` con `mvn exec:java "-Dexec.mainClass=Main"`. Esto correra la aplicación y se podrá utilizar.
 * Para ejecutar los test, utilice `mvn test`.
 
 ### 💡 Notas adicionales
