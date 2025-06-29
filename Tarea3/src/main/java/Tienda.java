@@ -10,7 +10,7 @@ public class Tienda {
     private int contadorCompras = 1;
 
     // Crear cliente con ID automático
-    public Cliente agregarClienteAutomatico(String nombre, String correo) {
+    public Cliente agregarCliente(String nombre, String correo) {
         if (correo == null || !correo.contains("@")) {
             throw new IllegalArgumentException("Correo inválido");
         }
@@ -21,20 +21,6 @@ public class Tienda {
         }
         clientes.add(nuevoCliente);
         return nuevoCliente;
-    }
-
-    // Métodos existentes
-    
-    public void agregarCliente(Cliente cliente) {
-        if (buscarClientePorId(cliente.getId()) != null) {
-            System.out.println("⚠️ Ya existe un cliente con ese ID.");
-            return;
-        }
-        clientes.add(cliente);
-    }
-    
-    public List<Cliente> getClientes() {
-        return clientes;
     }
 
     public void mostrarClientes() {
@@ -76,49 +62,36 @@ public class Tienda {
         return false;
     }
     
-    // Registrar compra con ID automático
-    public Compra registrarCompraAutomatica(String idCliente, int monto) {
+    public Compra registrarNuevaCompra(String idCliente, int monto) {
         Cliente cliente = buscarClientePorId(idCliente);
+
         if (cliente == null) {
             System.out.println("❌ No se encontró el cliente con ID: " + idCliente);
             return null;
         }
-        String nuevoIdCompra = "COMP" + contadorCompras++;  // Ejemplo: COMP1, COMP2, ...
+
+        String nuevoIdCompra = "COMP" + contadorCompras++;
         Compra nuevaCompra = new Compra(nuevoIdCompra, idCliente, monto, LocalDate.now());
-        registrarCompra(nuevaCompra);
-        return nuevaCompra;
-    }
 
-    public void registrarCompra(Compra compra) {
-        Cliente cliente = buscarClientePorId(compra.getIdCliente());
+        compras.add(nuevaCompra);
 
-        if (cliente == null) {
-            System.out.println("❌ No se encontró el cliente con ID: " + compra.getIdCliente());
-            return;
-        }
+        int puntosGanados = nuevaCompra.calcularPuntosBase(cliente.getNivel());
 
-        compras.add(compra);
-
-        // Calcular puntos
-        int puntosGanados = compra.calcularPuntosBase(cliente.getNivel());
-
-        // Bonus por 3 compras en el mismo día
         long comprasHoy = compras.stream()
             .filter(c -> c.getIdCliente().equals(cliente.getId()))
-            .filter(c -> c.getFecha().equals(compra.getFecha()))
+            .filter(c -> c.getFecha().equals(nuevaCompra.getFecha()))
             .count();
 
         if (comprasHoy == 3) {
             System.out.println("🎉 ¡Bonus por 3 compras en el mismo día! +10 puntos extra.");
             puntosGanados += 10;
-            cliente.setStreakDias(cliente.getStreakDias() + 1);
         }
-
-        // Actualizar puntos y nivel
+        
         cliente.setPuntos(cliente.getPuntos() + puntosGanados);
         actualizarNivel(cliente);
 
-        System.out.println("✅ Compra registrada. Puntos ganados: " + puntosGanados);
+        System.out.println("✅ Compra registrada. Puntos ganados: " + puntosGanados + " para cliente " + cliente.getNombre());
+        return nuevaCompra;
     }
 
     private void actualizarNivel(Cliente cliente) {

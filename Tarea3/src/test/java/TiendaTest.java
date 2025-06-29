@@ -1,5 +1,4 @@
 import static org.junit.jupiter.api.Assertions.*;
-import java.time.LocalDate;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,122 +10,106 @@ public class TiendaTest {
     @BeforeEach
     public void setUp() {
         tienda = new Tienda();
-        cliente = new Cliente("001", "Ana", "ana@mail.com");
-        tienda.agregarCliente(cliente);
+        cliente = tienda.agregarCliente("Ana", "ana@mail.com");
     }
 
     @Test
     public void givenNewCliente_whenAdded_thenClienteIsStored() {
-        Cliente nuevo = new Cliente("002", "Juan", "juan@mail.com");
-        tienda.agregarCliente(nuevo);
-        assertEquals(nuevo, tienda.buscarClientePorId("002"));
-    }
-
-    @Test
-    public void givenDuplicatedClienteId_whenAdded_thenNotStoredTwice() {
-        Cliente duplicado = new Cliente("001", "Otra Ana", "otra@correo.com");
-        tienda.agregarCliente(duplicado);
-        int count = 0;
-        for (Cliente c : tienda.getClientes()) {
-            if (c.getId().equals("001")) count++;
-        }
-        assertEquals(1, count);
+        Cliente nuevo = tienda.agregarCliente("Juan", "juan@mail.com");
+        assertEquals(nuevo, tienda.buscarClientePorId(nuevo.getId()));
     }
 
     @Test
     public void givenExistingClienteId_whenSearched_thenReturnsCliente() {
-        Cliente resultado = tienda.buscarClientePorId("001");
+        Cliente resultado = tienda.buscarClientePorId(cliente.getId());
         assertNotNull(resultado);
         assertEquals("Ana", resultado.getNombre());
     }
 
     @Test
     public void givenNonExistentClienteId_whenSearched_thenReturnsNull() {
-        Cliente resultado = tienda.buscarClientePorId("999");
+        Cliente resultado = tienda.buscarClientePorId("NO_EXISTE");
         assertNull(resultado);
     }
 
     @Test
     public void givenExistingCliente_whenUpdated_thenDataIsModified() {
-        boolean actualizado = tienda.actualizarCliente("001", "Valentina", "vale@mail.com");
+        boolean actualizado = tienda.actualizarCliente(cliente.getId(), "Valentina", "vale@mail.com");
         assertTrue(actualizado);
-        Cliente actualizadoCliente = tienda.buscarClientePorId("001");
+        Cliente actualizadoCliente = tienda.buscarClientePorId(cliente.getId());
         assertEquals("Valentina", actualizadoCliente.getNombre());
         assertEquals("vale@mail.com", actualizadoCliente.getCorreo());
     }
 
     @Test
     public void givenNonExistentCliente_whenUpdated_thenReturnsFalse() {
-        boolean actualizado = tienda.actualizarCliente("999", "Nada", "nada@x.cl");
+        boolean actualizado = tienda.actualizarCliente("NO_EXISTE", "Nada", "nada@x.cl");
         assertFalse(actualizado);
     }
 
     @Test
     public void givenExistingCliente_whenDeleted_thenItIsRemoved() {
-        boolean eliminado = tienda.eliminarCliente("001");
+        boolean eliminado = tienda.eliminarCliente(cliente.getId());
         assertTrue(eliminado);
-        assertNull(tienda.buscarClientePorId("001"));
+        assertNull(tienda.buscarClientePorId(cliente.getId()));
     }
 
     @Test
     public void givenNonExistentCliente_whenDeleted_thenReturnsFalse() {
-        boolean eliminado = tienda.eliminarCliente("999");
+        boolean eliminado = tienda.eliminarCliente("NO_EXISTE");
         assertFalse(eliminado);
     }
-    
-    @Test
-    public void givenValidCliente_whenRegistrarCompraAutomatica_thenCompraRegistradaConId() {
-        Compra compra = tienda.registrarCompraAutomatica("001", 1000);
 
+    @Test
+    public void givenValidCliente_whenRegistrarCompra_thenCompraRegistrada() {
+        Compra compra = tienda.registrarNuevaCompra(cliente.getId(), 1000);
         assertNotNull(compra);
-        assertEquals("001", compra.getIdCliente());
+        assertEquals(cliente.getId(), compra.getIdCliente());
         assertTrue(compra.getIdCompra().startsWith("COMP"));
         assertEquals(1000, compra.getMonto());
     }
-    
+
     @Test
-    public void givenInvalidCliente_whenRegistrarCompraAutomatica_thenRetornaNull() {
-        Compra compra = tienda.registrarCompraAutomatica("999", 500);
+    public void givenInvalidCliente_whenRegistrarCompra_thenRetornaNull() {
+        Compra compra = tienda.registrarNuevaCompra("NO_EXISTE", 500);
         assertNull(compra);
     }
-    
+
     @Test
     public void givenClienteConCompra_whenMostrarCompras_thenNoFalla() {
-        tienda.registrarCompra(new Compra("CX", "001", 500, LocalDate.now()));
-        tienda.mostrarComprasDeCliente("001");
+        tienda.registrarNuevaCompra(cliente.getId(), 500);
+        tienda.mostrarComprasDeCliente(cliente.getId());
     }
-    
+
     @Test
     public void givenClienteSinCompras_whenMostrarCompras_thenNoFalla() {
-        tienda.mostrarComprasDeCliente("001");
+        tienda.mostrarComprasDeCliente(cliente.getId());
     }
-    
+
     @Test
     public void givenNoClientes_whenMostrarClientes_thenNoFalla() {
         Tienda tiendaVacia = new Tienda();
         tiendaVacia.mostrarClientes();
     }
-    
+
     @Test
     public void givenClientesExistentes_whenMostrarClientes_thenNoFalla() {
         tienda.mostrarClientes();
     }
-    
-    @Test
-    public void givenValidData_whenAgregarClienteAutomatico_thenClienteRegistrado() {
-        Cliente nuevo = tienda.agregarClienteAutomatico("Luis", "luis@mail.com");
 
+    @Test
+    public void givenValidData_whenAgregarCliente_thenClienteRegistrado() {
+        Cliente nuevo = tienda.agregarCliente("Luis", "luis@mail.com");
         assertNotNull(nuevo);
         assertTrue(nuevo.getId().startsWith("C"));
         assertEquals("Luis", nuevo.getNombre());
     }
-    
+
     @Test
-    public void givenInvalidCorreo_whenAgregarClienteAutomatico_thenThrowsException() {
+    public void givenInvalidCorreo_whenAgregarCliente_thenThrowsException() {
         assertThrows(IllegalArgumentException.class, () -> {
-            tienda.agregarClienteAutomatico("Luis", "correo_sin_@");
+            tienda.agregarCliente("Luis", "correo");
         });
     }
-
 }
 

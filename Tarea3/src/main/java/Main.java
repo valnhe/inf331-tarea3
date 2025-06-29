@@ -41,7 +41,7 @@ public class Main {
                             String correo = scanner.nextLine();
 
                             try {
-                                Cliente nuevo = tienda.agregarClienteAutomatico(nombre, correo);
+                                Cliente nuevo = tienda.agregarCliente(nombre, correo);
                                 System.out.println("✅ Cliente agregado correctamente con ID: " + nuevo.getId());
                             } catch (IllegalArgumentException e) {
                                 System.out.println("❌ Error: " + e.getMessage());
@@ -131,7 +131,7 @@ public class Main {
                     int monto = scanner.nextInt();
                     scanner.nextLine();
 
-                    Compra compra = tienda.registrarCompraAutomatica(idCliente, monto);
+                    Compra compra = tienda.registrarNuevaCompra(idCliente, monto);
                     if (compra != null) {
                         System.out.println("✅ Compra registrada con ID: " + compra.getIdCompra());
                     }
