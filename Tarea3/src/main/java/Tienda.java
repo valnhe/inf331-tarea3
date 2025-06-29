@@ -13,7 +13,7 @@ public class Tienda {
         if (correo == null || !correo.contains("@")) {
             throw new IllegalArgumentException("Correo inválido");
         }
-        String nuevoId = "C" + contadorClientes++;  // Ejemplo: C1, C2, ...
+        String nuevoId = "C" + contadorClientes++;  // C1, C2, ...
         Cliente nuevoCliente = new Cliente(nuevoId, nombre, correo);
         if (buscarClientePorId(nuevoId) != null) {
             throw new IllegalArgumentException("ID de cliente duplicado");
