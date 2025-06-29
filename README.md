@@ -52,29 +52,41 @@ a
 | Cliente existente                   | Se actualiza la racha diaria   | El valor se guarda correctamente       | `2` días                   |
 
 ### TiendaTest
-| Given                             | When                           | Then                                      | Salida esperada       |
-| --------------------------------- | ------------------------------ | ----------------------------------------- | --------------------- |
-| Un cliente nuevo con ID único     | Se agrega a la tienda          | El cliente queda registrado correctamente | Cliente encontrado    |
-| Un cliente con ID duplicado       | Se intenta agregar a la tienda | No se duplica el registro                 | Solo uno con ese ID   |
-| Un cliente ya existente en tienda | Se busca por ID                | Se retorna el cliente                     | Cliente "Ana"         |
-| Un ID que no existe               | Se busca cliente               | No se encuentra cliente                   | `null`                |
-| Un cliente existente              | Se actualiza nombre y correo   | Cambios se aplican correctamente          | `"Valentina"` y email |
-| Un ID que no existe               | Se intenta actualizar          | No se aplica cambio                       | `false`               |
-| Un cliente existente              | Se elimina por ID              | El cliente es removido de la tienda       | `true`                |
-| Un ID que no existe               | Se intenta eliminar            | No se encuentra el cliente                | `false`               |
+| Given                              | When                      | **Then                                   | Salida esperada            |
+| --------------------------------------- | ------------------------------ | ------------------------------------------ | ------------------------------- |
+| Datos válidos de nombre y correo        | Se agrega cliente              | Se crea cliente con ID automático          | Cliente con ID tipo `C1`, `C2`… |
+| Cliente ya agregado con ID autogenerado | Se busca por ID                | Se retorna cliente                         | Cliente con nombre `"Ana"`      |
+| Un ID que no existe                     | Se busca cliente               | No se encuentra cliente                    | `null`                          |
+| Cliente existente                       | Se actualiza nombre y correo   | Cambios se aplican correctamente           | `"Valentina"` y nuevo correo    |
+| ID no existente                         | Se intenta actualizar          | No se aplica ningún cambio                 | `false`                         |
+| Cliente existente                       | Se elimina por ID              | Cliente es removido de la lista            | `true`                          |
+| ID no existente                         | Se intenta eliminar            | No se encuentra el cliente                 | `false`                         |
+| Cliente válido                          | Se registra compra automática  | Se crea compra con ID `COMPx`              | Compra registrada correctamente |
+| ID inválido                             | Se registra compra automática  | No se crea compra                          | `null`                          |
+| Cliente con compras registradas         | Se muestran sus compras        | Se imprime la información                  | No lanza excepción              |
+| Cliente sin compras                     | Se muestran sus compras        | Se indica que no tiene compras registradas | No lanza excepción              |
+| Tienda sin clientes                     | Se muestran todos los clientes | Se informa que no hay clientes             | No lanza excepción              |
+| Tienda con clientes                     | Se muestran todos los clientes | Se imprime la lista                        | No lanza excepción              |
+| Correo inválido (sin `@`)               | Se intenta agregar cliente     | Se lanza excepción                         | `IllegalArgumentException`      |
+| Correo `null`                           | Se intenta agregar cliente     | Se lanza excepción                         | `IllegalArgumentException`      |
+
 
 ### TiendaCompraTest
-| Given                                           | When                               | Then                                    | Salida esperada              |
-| ----------------------------------------------- | ---------------------------------- | --------------------------------------- | ---------------------------- |
-| Cliente Bronce hace compra de \$1000            | Se registra la compra              | Se agregan 10 puntos sin bonus          | 10 puntos, nivel "Bronce"    |
-| Cliente realiza 3 compras de \$500 el mismo día | Se registran todas las compras     | Se otorgan 10 puntos de bonus           | 25 puntos, racha = 1         |
-| Cliente con 1490 puntos                         | Realiza compra de \$1000           | Pasa a más de 1500 y sube a nivel "Oro" | Nivel actualizado a "Oro"    |
-| Compra con cliente no existente                 | Se registra compra con ID inválido | No se agrega la compra                  | Lista de compras sigue vacía |
-
-
+| Given                                   | When                       | Then                           |Salida esperada         |
+| -------------------------------------------- | ---------------------------------- | ----------------------------------- | ---------------------------- |
+| Cliente Bronce hace compra de \$1000         | Se registra compra automática      | Se agregan 10 puntos sin bonus      | 10 puntos, nivel `"Bronce"`  |
+| Cliente hace 3 compras de \$500 el mismo día | Se registran todas las compras     | Se otorgan 10 puntos extra de bonus | 25 puntos, bonus aplicado    |
+| Cliente con 1490 puntos                      | Hace compra de \$1000              | Supera 1500, sube a nivel `"Oro"`   | Nivel actualizado a `"Oro"`  |
+| Cliente no existente                         | Se registra compra con ID inválido | Compra no se agrega                 | Lista de compras sigue vacía |
 
 ## ⭐ ¿Qué tipo de cobertura he medido y por qué?
-a
+Se utilizó **EclEmma**, un plugin de Eclipse que permite medir cobertura de código al ejecutar pruebas. La cobertura obtenida corresponde a **cobertura de sentencias** y **de ramas**, lo que significa que se midió si todas las líneas y condiciones (`if`, `else`, etc.) fueron ejecutadas al menos una vez por los tests. Esta cobertura permite asegurar que se ejercitan los distintos caminos lógicos del programa, incluyendo casos esperados y alternativos.
+
+Los resultados globales mostraron una cobertura total del **69,4%**, donde la clase `Compra` alcanzó el **100%**, `Tienda` un **96.0%**, `Cliente` un **61,6%**, y `Main` un **0,0%**, lo cual es esperable ya que contiene interacción por consola y no se prueba automáticamente. A nivel de pruebas, `CompraTest` obtuvo **100%**, `TiendaCompraTest` un **100%**, `TiendaTest` un **96,7%** y `ClienteTest` un **92,3%**.
+
+![image](https://github.com/user-attachments/assets/1a298315-3008-4e99-b802-6c732c3167b0)
+
+La cobertura se logró ejecutando todas las clases de prueba con la opción "Coverage As → JUnit Test". En particular, se diseñaron tests con el enfoque **given-when-then** para seguir lo recomendado por TDD. Esto permitió cubrir tanto la lógica de asignación de puntos como la gestión automática de IDs y condiciones condicionales que cambian el comportamiento del sistema según los datos de entrada.
 
 ## 🔎 Otras consideraciones
 a
