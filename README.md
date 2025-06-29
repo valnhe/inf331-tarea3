@@ -25,7 +25,7 @@ Este sistema permite registrar clientes, compras y calcular puntos de fidelizaci
 - `Tienda`: Administra los clientes y compras, actualiza niveles, genera IDs automáticos.
 
 ### 📘 Diagrama de Clases (UML simplificado)
-a
+![image](https://github.com/user-attachments/assets/b57071e1-1387-4a96-a57c-3cc7468b1352)
 
 ## ⚙️ Instrucciones para compilar y ejecutar
 a
@@ -82,9 +82,9 @@ a
 ## ⭐ ¿Qué tipo de cobertura he medido y por qué?
 Se utilizó **EclEmma**, un plugin de Eclipse que permite medir cobertura de código al ejecutar pruebas. La cobertura obtenida corresponde a **cobertura de sentencias** y **de ramas**, lo que significa que se midió si todas las líneas y condiciones (`if`, `else`, etc.) fueron ejecutadas al menos una vez por los tests. Esta cobertura permite asegurar que se ejercitan los distintos caminos lógicos del programa, incluyendo casos esperados y alternativos.
 
-Los resultados globales mostraron una cobertura total del **69,4%**, donde la clase `Compra` alcanzó el **100%**, `Tienda` un **96.0%**, `Cliente` un **61,6%**, y `Main` un **0,0%**, lo cual es esperable ya que contiene interacción por consola y no se prueba automáticamente. A nivel de pruebas, `CompraTest` obtuvo **100%**, `TiendaCompraTest` un **100%**, `TiendaTest` un **96,7%** y `ClienteTest` un **92,3%**.
+Los resultados globales mostraron una cobertura total del **69,5%**, donde la clase `Compra` alcanzó el **100%**, `Tienda` un **96,8%**, `Cliente` un **61,6%**, y `Main` un **0,0%**, lo cual es esperable ya que contiene interacción por consola y no se prueba automáticamente. A nivel de pruebas, `CompraTest` obtuvo **100%**, `TiendaCompraTest` un **100%**, `TiendaTest` un **96,7%** y `ClienteTest` un **92,3%**.
 
-![image](https://github.com/user-attachments/assets/1a298315-3008-4e99-b802-6c732c3167b0)
+![image](https://github.com/user-attachments/assets/3b87dc30-9979-4bff-a3bc-d414c8f957fe)
 
 La cobertura se logró ejecutando todas las clases de prueba con la opción "Coverage As → JUnit Test". En particular, se diseñaron tests con el enfoque **given-when-then** para seguir lo recomendado por TDD. Esto permitió cubrir tanto la lógica de asignación de puntos como la gestión automática de IDs y condiciones condicionales que cambian el comportamiento del sistema según los datos de entrada.
 
