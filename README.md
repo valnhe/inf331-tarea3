@@ -103,7 +103,7 @@ Los resultados globales mostraron una cobertura total del **69,5%**, donde la cl
 
 ![image](https://github.com/user-attachments/assets/3b87dc30-9979-4bff-a3bc-d414c8f957fe)
 
-La cobertura se logró ejecutando todas las clases de prueba con la opción "Coverage As → JUnit Test". En particular, se diseñaron tests con el enfoque **given-when-then** para seguir lo recomendado por TDD. Esto permitió cubrir tanto la lógica de asignación de puntos como la gestión automática de IDs y condiciones condicionales que cambian el comportamiento del sistema según los datos de entrada.
+La cobertura se logró ejecutando todas las clases de prueba con la opción "Coverage As → JUnit Test". En particular, se diseñaron tests con el enfoque **given-when-then**. Esto permitió cubrir tanto la lógica de asignación de puntos como la gestión automática de IDs y condiciones condicionales que cambian el comportamiento del sistema según los datos de entrada.
 
 ## 📖 Licencia
 Por favor, revise este [link](https://github.com/valnhe/inf331-tarea3/blob/master/LICENSE.txt).
