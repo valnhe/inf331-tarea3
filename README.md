@@ -39,6 +39,8 @@ Este proyecto está desarrollado en Java y estructurado como una aplicación Mav
 2. Navega e ingresa a la carpeta `Tarea3`.
 3. Estando detro de la carpeta `Tarea3`, escriba `mvn compile`. Esto compilará todas las clases del directorio `src/main/java`.
 4. Ejecuta la clase principal `Main.java` con `mvn exec:java "-Dexec.mainClass=Main"`. Esto correra la aplicación y se podrá utilizar.
+   * En caso de que Maven no encuentre la clase `Main`, pruebe con `mvn exec:java -Dexec.mainClass=Main` (sin las comillas). Esto dependerá del sistema operativo.
+   * En Windows PowerShell funciona con `mvn exec:java "-Dexec.mainClass=Main".
 * Para ejecutar los test, utilice `mvn test`.
 
 ### 💡 Notas adicionales
