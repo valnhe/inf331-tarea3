@@ -9,7 +9,6 @@ public class Tienda {
     private int contadorClientes = 1;
     private int contadorCompras = 1;
 
-    // Crear cliente con ID automático
     public Cliente agregarCliente(String nombre, String correo) {
         if (correo == null || !correo.contains("@")) {
             throw new IllegalArgumentException("Correo inválido");
